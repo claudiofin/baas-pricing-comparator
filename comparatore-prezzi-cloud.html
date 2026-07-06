@@ -235,7 +235,7 @@
 
   <header>
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
-      <p class="eyebrow" data-i18n="eyebrow">Unit economics · BaaS / Serverless</p>
+      <p class="eyebrow" data-i18n="eyebrow">Unit economics · BaaS & piattaforme serverless</p>
       <div class="lang-switch">
         <button type="button" class="lang-btn" data-lang="it">IT</button>
         <button type="button" class="lang-btn" data-lang="en">EN</button>
@@ -541,7 +541,7 @@
 
   const I18N = {
     it: {
-      eyebrow: "Unit economics · BaaS / Serverless",
+      eyebrow: "Unit economics · BaaS & piattaforme serverless",
       h1_lead: "Quanto costa davvero:",
       h1_or: "o",
       sub: "Imposta il carico di lavoro della tua app una sola volta — utenti, database, storage, funzioni, realtime — e confronta la bolletta mensile stimata sui quattro stack, riga per riga, con le tariffe pubbliche verificate sulla documentazione ufficiale.",
@@ -627,7 +627,7 @@
       h3_included: "Cosa è incluso", h3_scenarios: "Scenari, grafico di scala e unit economics",
       h3_simplifications: "Semplificazioni assunte", h3_sources: "Fonti principali",
 
-      meth_cf: "<b>Cloudflare</b> — piano Workers Paid ($5/mese base) + D1 (righe lette/scritte, storage) + R2 (storage) + compute Workers (richieste + CPU time, al netto della quota di tempo I/O impostata sopra). Il realtime è modellato su Durable Objects (richieste, con hibernation attiva — per questo lo slider \"connessioni\" non lo tocca). Cloudflare non fattura mai l'uscita dati (Workers, D1, R2 sono tutti a egress zero) e non ha un prodotto Auth-as-a-service a consumo per MAU: le sessioni utente vivono nel tuo D1/KV, già conteggiato altrove — per questo la riga Auth è $0. Opzionali: Workers for Platforms (+$25/mese flat) e Workers AI (a neuroni, con soglia gratuita).",
+      meth_cf: "<b>Cloudflare</b> — a differenza degli altri tre, non è un BaaS preconfezionato: è una piattaforma edge/serverless component-based (nessun prodotto unico con SDK auth+db+storage integrato — si assembla a mano, ed è anche provisionabile via Terraform, a conferma della natura da infrastruttura più che da prodotto finito). Qui la modelliamo come piano Workers Paid ($5/mese base) + D1 (righe lette/scritte, storage) + R2 (storage) + compute Workers (richieste + CPU time, al netto della quota di tempo I/O impostata sopra). Il realtime è modellato su Durable Objects (richieste, con hibernation attiva — per questo lo slider \"connessioni\" non lo tocca). Cloudflare non fattura mai l'uscita dati (Workers, D1, R2 sono tutti a egress zero) e non ha un prodotto Auth-as-a-service a consumo per MAU: le sessioni utente vivono nel tuo D1/KV, già conteggiato altrove — per questo la riga Auth è $0. Opzionali: Workers for Platforms (+$25/mese flat) e Workers AI (a neuroni, con soglia gratuita).",
       meth_sb: "<b>Supabase</b> — piano Free, Pro ($25/mese, include $10 di credito compute che copre l'istanza Micro di default) o Team ($599/mese, stesse quote di Pro) più eccedenze su Egress (file scaricati <i>più</i> una stima delle risposte del database in bytes), Database Size, Storage, MAU, Edge Function Invocations, Realtime Messages/Connections. Non modelliamo add-on come IPv4/PITR/Read Replica.",
       meth_fb: "<b>Firebase</b> — piano Blaze (pay-as-you-go). Firestore per il database (letture/scritture/storage/network egress), Cloud Storage per i file, Cloud Functions 2nd gen (invocazioni + vCPU-secondi + GiB-secondi sul tempo di risposta <i>pieno</i>, in esecuzione su Cloud Run — a differenza di Cloudflare, l'attesa I/O qui è sempre fatturata), Firebase Authentication con la scala tariffaria a blocchi di Identity Platform oltre le 50k MAU gratuite, Realtime Database come proxy per il realtime (fatturato a GB scaricati, non a messaggio, e non a connessione). Opzionale: banda di Firebase App Hosting, come costo aggiuntivo per un frontend SSR sopra a Firestore/Storage.",
       meth_cv: "<b>Convex</b> — piano Free &amp; Starter, Professional ($25/mese per sviluppatore) o Business/Enterprise ($2.500/mese minimo, volume pricing personalizzato). A differenza degli altri tre, le query e mutation reattive di Convex sono compute-gratis sempre: paghi Function calls (conteggio invocazioni), Action compute (GB-ora, solo per le Actions che chiamano servizi esterni), Database storage, Database I/O (a GB trasferiti, non a operazione) e Data egress. Realtime e Auth non hanno una riga di costo propria: sono già ricompresi in function calls/I/O/egress e nel piano, senza fatturazione per MAU o per connessione — un altro provider, oltre a Cloudflare, senza billing Auth a consumo.",
@@ -713,7 +713,7 @@
       cv_auth_note: "incluso nel piano, nessuna fatturazione per utente attivo",
     },
     en: {
-      eyebrow: "Unit economics · BaaS / Serverless",
+      eyebrow: "Unit economics · BaaS & serverless platforms",
       h1_lead: "What it really costs:",
       h1_or: "or",
       sub: "Set your app's workload once — users, database, storage, functions, realtime — and compare the estimated monthly bill across all four stacks, line by line, using public rates verified against official documentation.",
@@ -799,7 +799,7 @@
       h3_included: "What's included", h3_scenarios: "Scenarios, scaling chart and unit economics",
       h3_simplifications: "Simplifications assumed", h3_sources: "Main sources",
 
-      meth_cf: "<b>Cloudflare</b> — Workers Paid plan ($5/month base) + D1 (rows read/written, storage) + R2 (storage) + Workers compute (requests + CPU time, net of the I/O wait share set above). Realtime is modeled on Durable Objects (requests, with hibernation active — which is why the \"connections\" slider doesn't affect it). Cloudflare never bills outbound data (Workers, D1, and R2 are all zero-egress) and has no pay-as-you-go Auth-as-a-service product billed per MAU: user sessions live in your D1/KV, already counted elsewhere — which is why the Auth line is $0. Optional: Workers for Platforms (+$25/month flat) and Workers AI (billed in neurons, with a free tier).",
+      meth_cf: "<b>Cloudflare</b> — unlike the other three, this isn't a packaged BaaS: it's a component-based edge/serverless platform (no single product with a built-in auth+db+storage SDK — you assemble it yourself, and it's provisionable via Terraform too, which underlines that it's infrastructure more than a finished product). Here we model it as the Workers Paid plan ($5/month base) + D1 (rows read/written, storage) + R2 (storage) + Workers compute (requests + CPU time, net of the I/O wait share set above). Realtime is modeled on Durable Objects (requests, with hibernation active — which is why the \"connections\" slider doesn't affect it). Cloudflare never bills outbound data (Workers, D1, and R2 are all zero-egress) and has no pay-as-you-go Auth-as-a-service product billed per MAU: user sessions live in your D1/KV, already counted elsewhere — which is why the Auth line is $0. Optional: Workers for Platforms (+$25/month flat) and Workers AI (billed in neurons, with a free tier).",
       meth_sb: "<b>Supabase</b> — Free, Pro ($25/month, includes $10 of compute credit covering the default Micro instance), or Team ($599/month, same quotas as Pro) plan, plus overage on Egress (file downloads plus an estimate of database response bytes), Database Size, Storage, MAU, Edge Function Invocations, Realtime Messages/Connections. We don't model add-ons such as IPv4/PITR/Read Replica.",
       meth_fb: "<b>Firebase</b> — Blaze plan (pay-as-you-go). Firestore for the database (reads/writes/storage/network egress), Cloud Storage for files, Cloud Functions 2nd gen (invocations + vCPU-seconds + GiB-seconds over the <i>full</i> response time, running on Cloud Run — unlike Cloudflare, I/O wait is always billed here), Firebase Authentication with Identity Platform's tiered pricing beyond the free 50k MAU, Realtime Database as a stand-in for realtime (billed in GB downloaded, not per message or per connection). Optional: Firebase App Hosting bandwidth, as an extra cost for an SSR frontend on top of Firestore/Storage.",
       meth_cv: "<b>Convex</b> — Free &amp; Starter, Professional ($25/month per developer), or Business/Enterprise ($2,500/month minimum, custom volume pricing) plan. Unlike the other three, Convex's reactive queries and mutations are always compute-free: you pay for Function calls (invocation count), Action compute (GB-hours, only for Actions that call external services), Database storage, Database I/O (billed in GB transferred, not per operation), and Data egress. Realtime and Auth have no cost line of their own: they're already folded into function calls/I/O/egress and the plan itself, with no per-MAU or per-connection billing — another provider, besides Cloudflare, with no pay-as-you-go Auth billing.",
